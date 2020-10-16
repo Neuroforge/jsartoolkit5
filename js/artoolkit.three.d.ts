@@ -3,7 +3,7 @@
 // Definitions by: Hakan Dilek <https://github.com/hakandilek>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-import { Scene, Renderer } from 'three';
+import { Scene, Renderer, OrthographicCamera } from 'three';
 import { ARCameraParam } from 'jsartoolkit5';
 import { ARControllerStatic as ARTK_APIStatic} from './artoolkit.api';
 
@@ -16,6 +16,8 @@ declare interface GetUserMediaThreeSceneConfig {
   width?: number; height?: number;
   maxARVideoSize?: number;
   cameraParam: string | ARCameraParam;
+  video?:HTMLVideoElement;
+  threeJsCamera?:OrthographicCamera | any;
   onSuccess: GetUserMediaThreeSceneConfigSuccessHandler;
 }
 

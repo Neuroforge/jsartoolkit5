@@ -43,7 +43,7 @@
 			var onSuccess = configuration.onSuccess;
 
 			obj.onSuccess = function(arController, arCameraParam) {
-				var scenes = arController.createThreeScene();
+				var scenes = arController.createThreeScene(obj.video, obj.threeJsCamera);
 				onSuccess(scenes, arController, arCameraParam);
 			};
 
@@ -78,8 +78,9 @@
 			In your frame loop, use arScene.process() and arScene.renderOn(renderer) to do frame processing and 3D rendering, respectively.
 
 			@param video Video image to use as scene background. Defaults to this.image
+			@param threeJsCamera ThreeJS Camera to use as camera for scene. Defaults to new THREE.OrthographicCamera(-1, 1, -1, 1, -1, 1);
 		*/
-		ARController.prototype.createThreeScene = function(video) {
+		ARController.prototype.createThreeScene = function(video, threeJsCamera) {
 			video = video || this.image;
 
 			this.setupThree();
@@ -102,7 +103,7 @@
 
 			// Create a camera and a scene for the video plane and
 			// add the camera and the video plane to the scene.
-			var videoCamera = new THREE.OrthographicCamera(-1, 1, -1, 1, -1, 1);
+			var videoCamera = threeJsCamera || new THREE.OrthographicCamera(-1, 1, -1, 1, -1, 1);
 			var videoScene = new THREE.Scene();
 			videoScene.add(plane);
 			videoScene.add(videoCamera);
